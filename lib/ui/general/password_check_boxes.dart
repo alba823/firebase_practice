@@ -1,5 +1,6 @@
-import 'package:firebase_practice/viewModels/log_in_view_model.dart';
 import 'package:flutter/material.dart';
+
+import '../states/password_state.dart';
 
 class PasswordCheckBoxes extends StatelessWidget {
   const PasswordCheckBoxes({super.key, required this.passwordState});

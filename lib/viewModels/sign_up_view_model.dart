@@ -1,13 +1,13 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_practice/data/services/firebase_service.dart';
 import 'package:firebase_practice/utils/result.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_practice/viewModels/log_in_view_model.dart';
+import 'package:flutter/material.dart';
 
 import '../ui/states/password_state.dart';
 
-class LogInViewModel extends ChangeNotifier {
-  LogInViewModel({required FirebaseService firebaseService})
+class SignUpViewModel extends ChangeNotifier {
+  SignUpViewModel({required FirebaseService firebaseService})
       : _firebaseService = firebaseService;
 
   final FirebaseService _firebaseService;
@@ -27,10 +27,6 @@ class LogInViewModel extends ChangeNotifier {
   bool _isButtonLoading = false;
 
   bool get isButtonLoading => _isButtonLoading;
-
-  void onEmailChanged(String? newValue) {
-    _emailController.text = newValue ?? "";
-  }
 
   void onPasswordChanged(String? newValue) {
     _passwordState = _passwordState.checkPassword(newValue);
@@ -56,18 +52,18 @@ class LogInViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void logInWithEmailAndPassword(
+  void signUpWithEmailAndPassword(
     bool isEmailValid, {
-    required Function(User user) onSuccess,
+    required Function(User? user) onSuccess,
     required Function(Exception) onFailure,
   }) {
     _highlightErrors();
-    if (!isEmailValid) {
+    if (!isEmailValid || !passwordState.isValid) {
       return;
     }
 
     _firebaseService
-        .logInWithEmailAndPassword(
+        .signUpWithEmailAndPassword(
             emailController.text, passwordController.text)
         .listen((event) {
       switch (event) {
@@ -78,11 +74,7 @@ class LogInViewModel extends ChangeNotifier {
           }
         case Success():
           {
-            if (_firebaseService.currentUser == null) {
-              onFailure(Exception("User is null"));
-            } else {
-              onSuccess(_firebaseService.currentUser!);
-            }
+            onSuccess(event.data);
           }
         case Failure():
           {
@@ -94,8 +86,4 @@ class LogInViewModel extends ChangeNotifier {
       notifyListeners();
     });
   }
-}
-
-extension EmailExtension on String {
-  bool get isValidEmail => EmailValidator.validate(this);
 }
