@@ -4,6 +4,7 @@ import 'package:firebase_practice/ui/general/password_check_boxes.dart';
 import 'package:firebase_practice/viewModels/sign_up_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
@@ -19,9 +20,9 @@ class SignUpScreen extends StatelessWidget {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(24),
-              child: Text("Sign up"),
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Text(AppLocalizations.of(context).sign_up_cta),
             ),
             Expanded(
               child: Column(
@@ -31,7 +32,13 @@ class SignUpScreen extends StatelessWidget {
                     emailController: viewModel.emailController,
                     passwordController: viewModel.passwordController,
                     highlightErrors: viewModel.passwordState.highlightErrors,
-                    emailValidator: (email) => viewModel.validateEmail(email),
+                    emailValidator: (email) => viewModel.validateEmail(
+                      email: email,
+                      requiredFieldMessage:
+                          AppLocalizations.of(context).required_field,
+                      invalidEmailMessage:
+                          AppLocalizations.of(context).email_is_not_valid,
+                    ),
                     onPasswordChanged: (newValue) =>
                         viewModel.onPasswordChanged(newValue),
                   ),
@@ -43,7 +50,7 @@ class SignUpScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 24),
               child: CustomButton(
                 onPressed: () => _onSignUpPressed(context, viewModel),
-                text: "Sign up",
+                text: AppLocalizations.of(context).sign_up_cta,
               ),
             ),
           ],

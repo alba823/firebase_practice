@@ -1,0 +1,24 @@
+{
+  "email": "Email",
+  "password": "Password",
+  "required_field": "This field is required",
+  "password_length_hint" : "At least 8 characters",
+  "password_uppercase_hint" : "At least 1 uppercase",
+  "password_lowercase_hint" : "At least 1 lowercase",
+  "password_number_hint" : "At least 1 number",
+  "user_info": "User: {user}",
+  "@user_info": {
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "sign_out_cta": "Sign Out",
+  "log_in_cta": "Log in",
+  "sign_up_cta": "Sign up",
+  "create_account_hint": "Don't have an account?\n",
+  "email_verification_sent_snack_bar": "Email verification has been sent",
+  "verify_email_cta": "Verify email",
+  "email_is_not_valid": "Email is not valid"
+}

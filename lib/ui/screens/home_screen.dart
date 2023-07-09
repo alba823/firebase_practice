@@ -3,6 +3,7 @@ import 'package:firebase_practice/ui/general/custom_button.dart';
 import 'package:firebase_practice/viewModels/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("User: ${user.prettyString}"),
+              Text(AppLocalizations.of(context).user_info(user.prettyString)),
               const SizedBox(height: 48),
               CustomButton(
                 isLoading: viewModel.isSignOutLoading,
@@ -37,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                     },
                   );
                 },
-                text: "Sign Out",
+                text: AppLocalizations.of(context).sign_out_cta,
               ),
               const SizedBox(height: 24),
               CustomButton(
@@ -45,8 +46,8 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   viewModel.sendEmailVerification(
                     onSuccess: () {
-                      const snackBar = SnackBar(
-                        content: Text("Email verification has been sent"),
+                      final snackBar = SnackBar(
+                        content: Text(AppLocalizations.of(context).email_verification_sent_snack_bar),
                         backgroundColor: Colors.green,
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -60,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                     },
                   );
                 },
-                text: "Verify email",
+                text: AppLocalizations.of(context).verify_email_cta,
               ),
             ],
           ),

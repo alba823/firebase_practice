@@ -9,6 +9,7 @@ import 'package:firebase_practice/viewModels/log_in_view_model.dart';
 import 'package:firebase_practice/viewModels/sign_up_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'ui/screens/home_screen.dart';
 import 'ui/screens/login_screen.dart';
@@ -31,6 +32,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: LoginScreen.route,
       routes: {
         LoginScreen.route: (context) => ChangeNotifierProvider(

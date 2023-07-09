@@ -1,5 +1,6 @@
 import 'package:firebase_practice/ui/general/custom_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmailAndPasswordForm extends StatelessWidget {
   const EmailAndPasswordForm(
@@ -28,18 +29,18 @@ class EmailAndPasswordForm extends StatelessWidget {
         children: [
           CustomForm(
             controller: emailController,
-            hintText: "Email",
+            hintText: AppLocalizations.of(context).email,
             validator: (email) => emailValidator(email),
           ),
           const SizedBox(height: 24),
           CustomForm(
             controller: passwordController,
-            hintText: "Password",
+            hintText: AppLocalizations.of(context).password,
             obscureText: true,
             underlineColor: highlightErrors ? Colors.red : null,
             onChanged: (newValue) => onPasswordChanged(newValue),
             validator: (password) =>
-            password?.isEmpty == true ? "This field is required" : null,
+            password?.isEmpty == true ? AppLocalizations.of(context).required_field : null,
           ),
         ],
       ),

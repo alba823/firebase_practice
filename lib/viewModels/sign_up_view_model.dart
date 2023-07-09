@@ -33,11 +33,15 @@ class SignUpViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? validateEmail(String? email) {
+  String? validateEmail({
+    String? email,
+    required String requiredFieldMessage,
+    required String invalidEmailMessage,
+  }) {
     if (email == null || email.isEmpty) {
-      return "Required field";
+      return requiredFieldMessage;
     } else if (!email.isValidEmail) {
-      return "Email is not valid";
+      return invalidEmailMessage;
     } else {
       return null;
     }
